@@ -1,12 +1,12 @@
 import { supabase } from "../utils/supabaseClient";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export type Identity = {
   full_name: string;
   id: string;
 };
 
-export default function Dashboard() {
+export default function List() {
   const [identities, setIdentities] = useState<Identity[] | null>([]);
 
   async function fetchIdentities() {
