@@ -14,3 +14,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.identity {
+  padding: 10px;
+}
+.identities {
+  display: flex;
+}
