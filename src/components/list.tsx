@@ -9,10 +9,6 @@ export type Identity = {
 export default function Dashboard() {
   const [identities, setIdentities] = useState<Identity[] | null>([]);
 
-  useEffect(() => {
-    fetchIdentities();
-  });
-
   async function fetchIdentities() {
     const { data } = await supabase.from("identities").select();
     setIdentities(data);
@@ -20,7 +16,11 @@ export default function Dashboard() {
 
   async function deleteIdentity(id: string) {
     await supabase.from("identities").delete().match({ id });
+    fetchIdentities();
   }
+
+  fetchIdentities();
+
   return (
     <div className="identities">
       {identities.map((identity) => (
