@@ -1,17 +1,14 @@
 import { supabase } from "../utils/supabaseClient";
-import { useState } from "react";
-
-export type Identity = {
-  full_name: string;
-  id: string;
-};
+import { useEffect, useState } from "react";
+import { definitions } from "~/types/supabase";
+import Link from "next/link";
 
 export default function List() {
   const [identities, setIdentities] = useState<definitions["identities"][]>([]);
 
   async function fetchIdentities() {
     const { data } = await supabase.from("identities").select();
-    setIdentities(data);
+    if (data) setIdentities(data);
   }
 
   async function deleteIdentity(id: string) {
@@ -19,7 +16,9 @@ export default function List() {
     fetchIdentities();
   }
 
-  fetchIdentities();
+  useEffect(() => {
+    fetchIdentities();
+  }, []);
 
   return (
     <div className="identities">
