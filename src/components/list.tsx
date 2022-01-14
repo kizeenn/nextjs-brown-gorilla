@@ -7,7 +7,7 @@ export type Identity = {
 };
 
 export default function List() {
-  const [identities, setIdentities] = useState<Identity[] | null>([]);
+  const [identities, setIdentities] = useState<definitions["identities"][]>([]);
 
   async function fetchIdentities() {
     const { data } = await supabase.from("identities").select();
