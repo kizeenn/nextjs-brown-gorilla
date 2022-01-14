@@ -25,7 +25,14 @@ export default function List() {
     <div className="identities">
       {identities.map((identity) => (
         <div className="identity" key={identity.id}>
-          <h1>{identity.full_name}</h1>
+          <Link
+            href={{
+              pathname: "/identities/[id]",
+              query: { id: identity.id },
+            }}
+          >
+            {identity.full_name}
+          </Link>
           <button onClick={() => deleteIdentity(identity.id)}>
             delete identity
           </button>
