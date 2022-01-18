@@ -9,8 +9,12 @@ export interface IdentityProps {
   id: string;
 }
 
-export default function Show(props: IdentityProps) {
+export default function Identity(props: IdentityProps) {
   const [identity, setIdentity] = useState<Identity>();
+
+  useEffect(() => {
+    fetchIdentity(props.id);
+  }, [props.id]);
 
   async function fetchIdentity(id: string) {
     const { data } = await supabase
@@ -22,12 +26,8 @@ export default function Show(props: IdentityProps) {
     if (data) setIdentity(data);
   }
 
-  useEffect(() => {
-    fetchIdentity(props.id);
-  }, []);
-
   return (
-    <div>
+    <>
       <h1>{identity?.full_name}</h1>
       <Link
         href={{
@@ -35,8 +35,8 @@ export default function Show(props: IdentityProps) {
           query: { id: identity?.id },
         }}
       >
-        edit identity
+        edit
       </Link>
-    </div>
+    </>
   );
 }
